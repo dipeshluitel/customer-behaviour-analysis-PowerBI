@@ -13,8 +13,24 @@ We have used the CSV files, used pandas for generating and exploring data within
 ---
 
 ## Project Structure
-
-- Soon Available
+```
+customer-behaviour-analysis-PowerBI/
+├── .gitignore
+├── dashboard/
+│   └── customer_shopping_behaviour_analysis_dashboard.pbix
+├── datasets/
+│   └── customer_shopping.csv
+├── docs/
+│   ├── documentation_business_analysis_sql.md
+│   ├── documentation_connecting_to_postgres_db.md
+│   └── documentation_data_exploration.md
+├── Jupyter_Notebook/
+│   └── customer_shopping_behaviour_analysis.ipynb
+├── LICENSE
+├── README.md
+└── scripts/
+    └── customer_shopping_behaviour_analysis.sql
+```
 ---
 
 ## License
