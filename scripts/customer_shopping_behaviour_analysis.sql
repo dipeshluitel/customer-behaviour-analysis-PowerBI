@@ -39,3 +39,31 @@ FROM customer
 GROUP BY item_purchased 
 ORDER BY discount_applied_percentage DESC
 LIMIT 5
+
+--7. Segment the customer into different segments (New, returning, Loyal) with total number falling in each segment
+WITH customer_type AS(
+	SELECT customer_id,
+	CASE
+		WHEN previous_purchases = 1 THEN 'New'
+		WHEN previous_purchases BETWEEN 2 AND 10 THEN 'Returning'
+		ELSE 'Loyal'
+	END AS customer_segment
+	FROM customer
+)
+
+SELECT customer_segment,
+COUNT(*) AS number_of_customers
+FROM customer_type
+GROUP BY customer_segment
+
+--8. Top 3 most purchased products within each category
+WITH top_products AS(
+	SELECT category,
+	item_purchased,
+	COUNT(item_purchased) AS total_purchase,
+	ROW_NUMBER() OVER(PARTITION BY category ORDER BY COUNT(item_purchased) DESC) AS product_rank
+	FROM customer	
+	GROUP BY category,item_purchased
+)
+
+SELECT * FROM top_products WHERE product_rank <= 3
