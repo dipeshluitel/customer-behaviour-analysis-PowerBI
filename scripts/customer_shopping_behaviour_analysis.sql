@@ -67,3 +67,17 @@ WITH top_products AS(
 )
 
 SELECT * FROM top_products WHERE product_rank <= 3
+
+-- 9. Are customers who are repeat buyers(more than 5 prev. purchase) also likely to subscribe?
+SELECT subscription_status, 
+COUNT(customer_id) AS repeat_buyers_count 
+FROM customer 
+WHERE previous_purchases > 5 
+GROUP BY subscription_status
+
+-- 10. Revenue By Age-Group
+SELECT age_group,
+ROUND(SUM(purchase_amount),2) AS total_purchase,
+ROUND(AVG(purchase_amount),2) AS average_purchase
+FROM customer
+GROUP BY age_group
